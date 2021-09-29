@@ -31,17 +31,23 @@ module.exports = {
         }
       },
       {
-        test: /\.css|.styl$/i,
+        test: /\.(css|styl)$/i,
+        exclude:/\.(woff|woff2)$/i,
         use: [MiniCssExtractPlugin.loader,
           'css-loader'          
         ],
       },
+      // {
+      //   test: /\.png/,
+      //   type: 'asset/resource'
+      // },
       {
-        test: /\.png/,
-        type: 'asset/resource'
+        test: /\.(png)$/i,
+        // More information here https://webpack.js.org/guides/asset-modules/
+        type: "asset/resource",
       },
       {
-        test: /\.(woff|woff2)$/,
+        test: /\.(woff|woff2)$/i,
         use: {
           loader: 'url-loader',
           options: {
