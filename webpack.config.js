@@ -8,7 +8,8 @@ module.exports = {
     output : 
     {
         path:  path.resolve(__dirname,'dist'),
-        filename: 'main.js'
+        filename: 'main.js',
+        assetModuleFilename: 'assets/[hash][ext][query]'
     },
     resolve : {
         extensions : ['.js']
@@ -27,7 +28,21 @@ module.exports = {
                     use : [MiniCssExtractPlugin.loader, 
                         'css-loader', 
                         'stylus-loader']
-                }
+                },
+                {
+                    test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                    type: 'asset/resource',
+                    generator: {
+                        filename : 'asset/images/[hash][ext][query]',
+                      }
+                },
+                {
+                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                    type: "asset/resource",
+                       generator: {
+                           filename: "assets/fonts/[hash][ext][query]",
+                       },
+                }    
         ]
     },
     plugins: [
