@@ -3,8 +3,6 @@ const path = require('path')
 const HtmlWbepackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 module.exports = {
     entry: './src/index.js',
@@ -19,10 +17,11 @@ module.exports = {
         alias : {
             '@utils' : path.resolve(__dirname,'src/utils'),
             '@templates' : path.resolve(__dirname,'src/templates'),
-            '@styles' : path.resolve(__dirname,'src/styles/'),
+            '@styles' : path.resolve(__dirname,'src/styles'),
             '@images' : path.resolve(__dirname,'src/assets/images')
         }
     },
+    mode: 'development',
     module : {
         rules:[
                 {
@@ -72,13 +71,5 @@ module.exports = {
             ]
         }),
         new Dotenv()
-    ],
-    optimization: {
-        minimize: true,
-                minimizer: [
-                    new CssMinimizerPlugin(),
-                    new TerserPlugin()
-                ],
-      }    
-
+    ]
 }
